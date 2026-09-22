@@ -18,7 +18,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=IBM+Plex+Mono:wght@400;500&family=Roboto+Flex:wdth,wght@100..151,400..700&display=swap">
 <style>
   :root {
     color-scheme: dark;
@@ -36,7 +36,7 @@
     --gold-deep: #8f7b52;
     --gold-10: rgba(201, 179, 126, .10);
     --gold-24: rgba(201, 179, 126, .24);
-    --sans: "Archivo", "Helvetica Neue", Arial, sans-serif;
+    --sans: "Archivo", "Roboto Flex", "Helvetica Neue", Arial, sans-serif;
     --mono: "IBM Plex Mono", "SF Mono", Menlo, Consolas, monospace;
   }
 
@@ -54,6 +54,10 @@
   .page { max-width: 1200px; margin: 0 auto; padding: 0 40px 72px; }
 
   .type-display { font-family: var(--sans); font-stretch: 125%; font-weight: 620; text-transform: uppercase; letter-spacing: .01em; line-height: .94; }
+  /* Archivo has no Cyrillic; Russian headings fall through to Roboto Flex, whose 125 % is
+     narrower than Archivo's. Its widest setting gets closest. Archivo clamps 151 to its own
+     maximum of 125, so the Latin headings do not change. */
+  .type-display { font-variation-settings: "wdth" 151; }
   .type-meta { font-family: var(--mono); text-transform: uppercase; letter-spacing: .12em; font-size: 13px; font-weight: 400; color: var(--ink-mute); }
   .num { font-family: var(--mono); font-variant-numeric: tabular-nums; }
 
@@ -217,7 +221,7 @@
     .hero::before { inset: 0 -24px; }
     .work { grid-template-columns: 1fr; }
     .result { position: static; }
-    .rates-body { grid-template-columns: 1fr; }
+    .rates-body { grid-template-columns: minmax(0, 1fr); }
     .rates-body > section:nth-child(odd) { border-right: 0; }
     .terms { grid-template-columns: 1fr; }
   }
@@ -230,6 +234,15 @@
     .tabs label { border-right: 0; }
     .nav { flex-wrap: wrap; }
     .bracket { font-size: 34px; }
+    /* Russian unit labels run longer than the English ones: let the label sit over its
+       field instead of pushing the table past the screen edge. */
+    .rt td.iu { width: 120px; }
+    .rt .ic { flex-wrap: wrap; gap: 4px 10px; }
+    .rt .u { white-space: normal; text-align: right; }
+    /* The link table is four numbers wide: keep each field readable and let the table
+       scroll inside its own frame rather than squeeze the digits. */
+    .rt td.i input { min-width: 64px; }
+    .rt th.n { white-space: nowrap; }
   }
   @media print {
     :root { --void: #fff; --stage: #fff; --panel: #f4f4f5; --slate: #eee; --hair: #bbb; --hair-60: #ccc; --ink: #111; --ink-soft: #444; --ink-mute: #666; --gold: #8f7b52; --gold-hi: #6e5d3a; --gold-deep: #8f7b52; --gold-10: #f3efe4; }
@@ -415,136 +428,136 @@
   </div>
 
   <!-- ================= rates ================= -->
-  <section class="sheet rates" id="rates">
+  <section class="sheet rates" id="rates" lang="ru">
     <div class="sheet-title">
-      <h2 class="type-display">Price list · unit rates</h2>
-      <span class="badge" id="rateBadge">example</span>
+      <h2 class="type-display">Прайс-лист · ставки за единицу</h2>
+      <span class="badge" id="rateBadge">пример</span>
     </div>
     <div class="rates-body">
       <section>
-        <h3>Rack, turnkey</h3>
+        <h3>Стойка под ключ</h3>
         <div class="rt-wrap"><table class="rt">
-          <thead><tr><th>Fit-out</th><th class="n">rate</th></tr></thead>
+          <thead><tr><th>Комплектация</th><th class="n">ставка</th></tr></thead>
           <tbody>
-            <tr><td>Empty rack<small>unloading, placement, leveling, anchoring, grounding, labeling</small></td><td class="i iu"><span class="ic"><span class="u" data-u="{c} / rack"></span><input type="number" data-r="rack.empty" min="0"></span></td></tr>
-            <tr><td>With PDUs and sensors<small>plus PDUs, sensors, blanking panels, cable managers</small></td><td class="i iu"><span class="ic"><span class="u" data-u="{c} / rack"></span><input type="number" data-r="rack.pdu" min="0"></span></td></tr>
-            <tr><td>Pre-populated<small>plus customer equipment installed per the rack elevation</small></td><td class="i iu"><span class="ic"><span class="u" data-u="{c} / rack"></span><input type="number" data-r="rack.prefilled" min="0"></span></td></tr>
-            <tr><td>High-density rack<small>Multiplier on the rack rate. Up to 2.5 t: rigging and extra hands to roll it in. 4–8 PDUs instead of two, heavy power cords, more blanking panels and cable managers. Roughly one and a half standard racks of labor.</small></td><td class="i iu"><span class="ic"><span class="u" data-u="× on rack rate"></span><input type="number" data-r="hdMult" min="1" step="0.05"></span></td></tr>
+            <tr><td>Пустая стойка<small>разгрузка, установка, выравнивание, крепление, заземление, маркировка</small></td><td class="i iu"><span class="ic"><span class="u" data-u="{c} за стойку"></span><input type="number" data-r="rack.empty" min="0"></span></td></tr>
+            <tr><td>С PDU и датчиками<small>плюс PDU, датчики, заглушки, кабельные органайзеры</small></td><td class="i iu"><span class="ic"><span class="u" data-u="{c} за стойку"></span><input type="number" data-r="rack.pdu" min="0"></span></td></tr>
+            <tr><td>С предзаполнением<small>плюс установка оборудования заказчика по схеме стойки</small></td><td class="i iu"><span class="ic"><span class="u" data-u="{c} за стойку"></span><input type="number" data-r="rack.prefilled" min="0"></span></td></tr>
+            <tr><td>Стойка высокой плотности<small>Множитель к ставке стойки. До 2,5 т: такелаж и лишние руки на закатку. 4–8 PDU вместо двух, тяжёлые силовые шнуры, больше заглушек и органайзеров. По труду это примерно полторы стандартные стойки.</small></td><td class="i iu"><span class="ic"><span class="u" data-u="× к ставке стойки"></span><input type="number" data-r="hdMult" min="1" step="0.05"></span></td></tr>
           </tbody>
         </table></div>
       </section>
 
       <section>
-        <h3>Link, port to port · pull, two terminations, labeling</h3>
+        <h3>Линк порт-порт · протяжка, две разделки, маркировка</h3>
         <div class="rt-wrap"><table class="rt">
-          <thead><tr><th>Media</th><th class="n">up to 15 m<small data-u="{c} / link"></small></th><th class="n">up to 50 m<small data-u="{c} / link"></small></th><th class="n">up to 100 m<small data-u="{c} / link"></small></th><th class="n">over 100 m<small data-u="{c} / m extra"></small></th></tr></thead>
+          <thead><tr><th>Среда</th><th class="n">до 15 м<small data-u="{c} за линк"></small></th><th class="n">до 50 м<small data-u="{c} за линк"></small></th><th class="n">до 100 м<small data-u="{c} за линк"></small></th><th class="n">100+ м<small data-u="+{c} за м"></small></th></tr></thead>
           <tbody>
-            <tr><td>Copper Cat6A</td><td class="i"><input type="number" data-r="link.cu.0" min="0"></td><td class="i"><input type="number" data-r="link.cu.1" min="0"></td><td class="i"><input type="number" data-r="link.cu.2" min="0"></td><td class="i"><input type="number" data-r="over.cu" min="0"></td></tr>
-            <tr><td>Fiber LC</td><td class="i"><input type="number" data-r="link.lc.0" min="0"></td><td class="i"><input type="number" data-r="link.lc.1" min="0"></td><td class="i"><input type="number" data-r="link.lc.2" min="0"></td><td class="i"><input type="number" data-r="over.lc" min="0"></td></tr>
-            <tr><td>MPO trunk<small>pre-terminated, each</small></td><td class="i"><input type="number" data-r="link.mpo.0" min="0"></td><td class="i"><input type="number" data-r="link.mpo.1" min="0"></td><td class="i"><input type="number" data-r="link.mpo.2" min="0"></td><td class="i"><input type="number" data-r="over.mpo" min="0"></td></tr>
+            <tr><td>Медь Cat6A</td><td class="i"><input type="number" data-r="link.cu.0" min="0"></td><td class="i"><input type="number" data-r="link.cu.1" min="0"></td><td class="i"><input type="number" data-r="link.cu.2" min="0"></td><td class="i"><input type="number" data-r="over.cu" min="0"></td></tr>
+            <tr><td>Оптика LC</td><td class="i"><input type="number" data-r="link.lc.0" min="0"></td><td class="i"><input type="number" data-r="link.lc.1" min="0"></td><td class="i"><input type="number" data-r="link.lc.2" min="0"></td><td class="i"><input type="number" data-r="over.lc" min="0"></td></tr>
+            <tr><td>Транк MPO<small>предтерминированный, за штуку</small></td><td class="i"><input type="number" data-r="link.mpo.0" min="0"></td><td class="i"><input type="number" data-r="link.mpo.1" min="0"></td><td class="i"><input type="number" data-r="link.mpo.2" min="0"></td><td class="i"><input type="number" data-r="over.mpo" min="0"></td></tr>
           </tbody>
         </table></div>
       </section>
 
       <section>
-        <h3>Pathways and certification</h3>
+        <h3>Трассы и сертификация</h3>
         <div class="rt-wrap"><table class="rt">
-          <thead><tr><th>Unit</th><th class="n">rate</th></tr></thead>
+          <thead><tr><th>Единица</th><th class="n">ставка</th></tr></thead>
           <tbody>
-            <tr><td>Meter of tray or ladder, per tier<small>hangers, bends, drops to racks</small></td><td class="i iu"><span class="ic"><span class="u" data-u="{c} / m"></span><input type="number" data-r="tray" min="0"></span></td></tr>
-            <tr><td>Certification, copper, per link</td><td class="i iu"><span class="ic"><span class="u" data-u="{c} / link"></span><input type="number" data-r="cert.cu" min="0"></span></td></tr>
-            <tr><td>Certification, fiber LC, per link</td><td class="i iu"><span class="ic"><span class="u" data-u="{c} / link"></span><input type="number" data-r="cert.lc" min="0"></span></td></tr>
-            <tr><td>Certification, MPO trunk, each</td><td class="i iu"><span class="ic"><span class="u" data-u="{c} / trunk"></span><input type="number" data-r="cert.mpo" min="0"></span></td></tr>
+            <tr><td>Метр лотка или лестницы на ярус<small>подвесы, повороты, спуски к стойкам</small></td><td class="i iu"><span class="ic"><span class="u" data-u="{c} за м"></span><input type="number" data-r="tray" min="0"></span></td></tr>
+            <tr><td>Сертификация, медь, за линк</td><td class="i iu"><span class="ic"><span class="u" data-u="{c} за линк"></span><input type="number" data-r="cert.cu" min="0"></span></td></tr>
+            <tr><td>Сертификация, оптика LC, за линк</td><td class="i iu"><span class="ic"><span class="u" data-u="{c} за линк"></span><input type="number" data-r="cert.lc" min="0"></span></td></tr>
+            <tr><td>Сертификация, транк MPO, за штуку</td><td class="i iu"><span class="ic"><span class="u" data-u="{c} за транк"></span><input type="number" data-r="cert.mpo" min="0"></span></td></tr>
           </tbody>
         </table></div>
       </section>
 
       <section>
-        <h3>Project lines and brackets</h3>
+        <h3>Проектные строки и вилки</h3>
         <div class="rt-wrap"><table class="rt">
-          <thead><tr><th>Unit</th><th class="n">value</th></tr></thead>
+          <thead><tr><th>Единица</th><th class="n">значение</th></tr></thead>
           <tbody>
-            <tr><td>As-built documentation<small>per project, per 50 racks</small></td><td class="i iu"><span class="ic"><span class="u" data-u="{c} / project"></span><input type="number" data-r="docs" min="0"></span></td></tr>
-            <tr><td>Mobilization<small>badges, tools, site setup. Vehicles are priced in the transport lines below.</small></td><td class="i iu"><span class="ic"><span class="u" data-u="{c} / project"></span><input type="number" data-r="mob" min="0"></span></td></tr>
-            <tr><td>Truck rental, per load-day<small>When the warehouse and the site are apart: one rental day per truckload, racks and tools out, empties back.</small></td><td class="i iu"><span class="ic"><span class="u" data-u="{c} / load-day"></span><input type="number" data-r="truckDay" min="0"></span></td></tr>
-            <tr><td>Mileage, per mile<small>Applied to the round trip of every truckload: fuel, tolls, driver time.</small></td><td class="i iu"><span class="ic"><span class="u" data-u="{c} / mi"></span><input type="number" data-r="perMile" min="0" step="0.1"></span></td></tr>
-            <tr><td>Racks per truckload<small>Box truck capacity used to estimate the number of loads from the rack count.</small></td><td class="i iu"><span class="ic"><span class="u" data-u="racks / load"></span><input type="number" data-r="racksPerLoad" min="1" step="1"></span></td></tr>
-            <tr><td>Contingency, %<small>Added to the subtotal for the unforeseen: an extra drop, relabeling, waiting for access.</small></td><td class="i iu"><span class="ic"><span class="u" data-u="% of subtotal"></span><input type="number" data-r="contingency" min="0" max="100"></span></td></tr>
-            <tr><td>Bracket “customer's word”, ±%<small>Half-width of the bracket around the midpoint when the inputs are told, not drawn: rack count, ports per rack, media, new or live hall.</small></td><td class="i iu"><span class="ic"><span class="u" data-u="± %"></span><input type="number" data-r="spread.words" min="0" max="100"></span></td></tr>
-            <tr><td>Bracket “hall floor plan”, ±%<small>Rows, meet-me room and route lengths taken from the floor plan.</small></td><td class="i iu"><span class="ic"><span class="u" data-u="± %"></span><input type="number" data-r="spread.plan" min="0" max="100"></span></td></tr>
-            <tr><td>Bracket “port-to-port schedule”, ±%<small>Cable and bundle schedule per port. This is the firm price.</small></td><td class="i iu"><span class="ic"><span class="u" data-u="± %"></span><input type="number" data-r="spread.p2p" min="0" max="100"></span></td></tr>
+            <tr><td>Исполнительная документация<small>за проект, на каждые 50 стоек</small></td><td class="i iu"><span class="ic"><span class="u" data-u="{c} за проект"></span><input type="number" data-r="docs" min="0"></span></td></tr>
+            <tr><td>Мобилизация<small>пропуска, инструмент, развёртывание на объекте. Транспорт считается в строках ниже.</small></td><td class="i iu"><span class="ic"><span class="u" data-u="{c} за проект"></span><input type="number" data-r="mob" min="0"></span></td></tr>
+            <tr><td>Аренда машины, за рейс-день<small>Когда склад и объект в разных местах: один день аренды на рейс, туда стойки и инструмент, обратно тара.</small></td><td class="i iu"><span class="ic"><span class="u" data-u="{c} за рейс-день"></span><input type="number" data-r="truckDay" min="0"></span></td></tr>
+            <tr><td>Пробег, за милю<small>Считается туда и обратно для каждого рейса: топливо, платные дороги, время водителя.</small></td><td class="i iu"><span class="ic"><span class="u" data-u="{c} за милю"></span><input type="number" data-r="perMile" min="0" step="0.1"></span></td></tr>
+            <tr><td>Стоек на рейс<small>Вместимость фургона: по ней число рейсов оценивается из числа стоек.</small></td><td class="i iu"><span class="ic"><span class="u" data-u="стоек за рейс"></span><input type="number" data-r="racksPerLoad" min="1" step="1"></span></td></tr>
+            <tr><td>Резерв, %<small>Добавляется к промежуточному итогу на непредвиденное: лишний спуск, перемаркировка, ожидание доступа.</small></td><td class="i iu"><span class="ic"><span class="u" data-u="% от суммы"></span><input type="number" data-r="contingency" min="0" max="100"></span></td></tr>
+            <tr><td>Вилка «со слов заказчика», ±%<small>Полуширина вилки вокруг середины, когда исходные данные сказаны, а не начерчены: число стоек, портов на стойку, среда, новый или действующий зал.</small></td><td class="i iu"><span class="ic"><span class="u" data-u="± %"></span><input type="number" data-r="spread.words" min="0" max="100"></span></td></tr>
+            <tr><td>Вилка «по плану зала», ±%<small>Ряды, кроссовая и длины трасс взяты с плана зала.</small></td><td class="i iu"><span class="ic"><span class="u" data-u="± %"></span><input type="number" data-r="spread.plan" min="0" max="100"></span></td></tr>
+            <tr><td>Вилка «по схеме порт-порт», ±%<small>Кабельный журнал и пучки по каждому порту. Это твёрдая цена.</small></td><td class="i iu"><span class="ic"><span class="u" data-u="± %"></span><input type="number" data-r="spread.p2p" min="0" max="100"></span></td></tr>
           </tbody>
         </table></div>
       </section>
 
       <section>
-        <h3>Site condition multipliers · applied to labor</h3>
-        <p class="note">Applied to the labor lines only: racks, links, trunks, pathways and certification. Documentation and mobilization stay flat. When several conditions are on, the multipliers compound: <span id="coefNote"></span></p>
+        <h3>Множители условий площадки · к работам</h3>
+        <p class="note">Применяются только к строкам работ: стойки, линки, транки, трассы и сертификация. Документация и мобилизация не меняются. Если включено несколько условий, множители перемножаются: <span id="coefNote"></span></p>
         <div class="rt-wrap"><table class="rt">
-          <thead><tr><th>Condition</th><th class="n">multiplier</th></tr></thead>
+          <thead><tr><th>Условие</th><th class="n">множитель</th></tr></thead>
           <tbody>
-            <tr><td>Live data hall<small>Working next to the customer's powered equipment: escorts and permits, no dust or noise, aisles stay clear, every cable is pulled slower and with more care, and a slip can take down someone else's link. Usually the heaviest multiplier.</small></td><td class="i iu"><span class="ic"><span class="u" data-u="× on labor"></span><input type="number" data-r="coef.live" min="1" step="0.05"></span></td></tr>
-            <tr><td>Pathways above 3 m<small>A lift or scaffold, fall protection and a second person on the floor. Fewer meters of tray per hour.</small></td><td class="i iu"><span class="ic"><span class="u" data-u="× on labor"></span><input type="number" data-r="coef.height" min="1" step="0.05"></span></td></tr>
-            <tr><td>Night windows, weekends<small>Crew premium for nights and weekends, short work windows with idle time between them, after-hours site access.</small></td><td class="i iu"><span class="ic"><span class="u" data-u="× on labor"></span><input type="number" data-r="coef.night" min="1" step="0.05"></span></td></tr>
-            <tr><td>Under raised floor<small>Lifting and replacing tiles, working prone, cable is harder to see and slower to label than in an open overhead tray.</small></td><td class="i iu"><span class="ic"><span class="u" data-u="× on labor"></span><input type="number" data-r="coef.raised" min="1" step="0.05"></span></td></tr>
+            <tr><td>Действующий зал<small>Работа рядом с включённым оборудованием заказчика: сопровождение и допуски, без пыли и шума, проходы свободны, каждый кабель тянется медленнее и аккуратнее, а одно неловкое движение может положить чужой линк. Обычно самый тяжёлый множитель.</small></td><td class="i iu"><span class="ic"><span class="u" data-u="× к работам"></span><input type="number" data-r="coef.live" min="1" step="0.05"></span></td></tr>
+            <tr><td>Трассы выше 3 м<small>Вышка или подмости, страховка и второй человек внизу. Меньше метров лотка в час.</small></td><td class="i iu"><span class="ic"><span class="u" data-u="× к работам"></span><input type="number" data-r="coef.height" min="1" step="0.05"></span></td></tr>
+            <tr><td>Ночные окна, выходные<small>Надбавка бригаде за ночи и выходные, короткие рабочие окна с простоем между ними, доступ на объект в нерабочее время.</small></td><td class="i iu"><span class="ic"><span class="u" data-u="× к работам"></span><input type="number" data-r="coef.night" min="1" step="0.05"></span></td></tr>
+            <tr><td>Под фальшполом<small>Снять и вернуть плитки, работа лёжа, кабель хуже видно и дольше маркировать, чем в открытом верхнем лотке.</small></td><td class="i iu"><span class="ic"><span class="u" data-u="× к работам"></span><input type="number" data-r="coef.raised" min="1" step="0.05"></span></td></tr>
           </tbody>
         </table></div>
       </section>
 
       <section>
-        <h3>Currency and signature</h3>
+        <h3>Валюта и подпись</h3>
         <div class="rt-wrap"><table class="rt">
           <tbody>
-            <tr><td>Currency sign<small>Drives every rate label and total on the page. A single symbol goes before the number, a code goes after. Changing it does not convert the figures.</small></td><td class="i"><input type="text" data-r="cur" maxlength="6"></td></tr>
-            <tr><td>Contractor<small>shown in the footer</small></td><td class="i" style="width:220px"><input type="text" data-r="company" maxlength="60"></td></tr>
+            <tr><td>Знак валюты<small>Подставляется во все подписи ставок и итоги на странице. Одиночный символ ставится перед числом, буквенный код после. Цифры при смене не пересчитываются.</small></td><td class="i"><input type="text" data-r="cur" maxlength="6"></td></tr>
+            <tr><td>Подрядчик<small>показывается в подвале</small></td><td class="i" style="width:220px"><input type="text" data-r="company" maxlength="60"></td></tr>
           </tbody>
         </table></div>
       </section>
 
       <div class="rates-actions">
-        <button type="button" class="btn primary" id="copyLink">Copy link with these rates</button>
-        <button type="button" class="btn" id="resetRates">Restore example rates</button>
-        <div class="linkbox"><input type="text" id="linkOut" readonly aria-label="Link with rates" placeholder="the link will appear here"></div>
+        <button type="button" class="btn primary" id="copyLink">Скопировать ссылку с этими ставками</button>
+        <button type="button" class="btn" id="resetRates">Вернуть примерные ставки</button>
+        <div class="linkbox"><input type="text" id="linkOut" readonly aria-label="Ссылка со ставками" placeholder="здесь появится ссылка"></div>
       </div>
     </div>
   </section>
 
   <!-- ================= terms ================= -->
-  <section class="terms">
+  <section class="terms" lang="ru">
     <div>
-      <h2 class="type-display">Not included</h2>
+      <h2 class="type-display">Не входит</h2>
       <ul>
-        <li>Active equipment and its configuration.</li>
-        <li>Cable, trunks, trays and hardware as materials: separate bill of materials.</li>
-        <li>Power up to the PDU, busway, UPS.</li>
-        <li>General contractor scope: floor, ceiling, fire suppression.</li>
-        <li>Rigging through non-standard openings.</li>
+        <li>Активное оборудование и его настройка.</li>
+        <li>Кабель, транки, лотки и крепёж как материал: отдельная спецификация.</li>
+        <li>Электропитание до PDU, шинопроводы, ИБП.</li>
+        <li>Работы генподрядчика: пол, потолок, пожаротушение.</li>
+        <li>Такелаж через нестандартные проёмы.</li>
       </ul>
     </div>
     <div>
-      <h2 class="type-display">What narrows the bracket</h2>
+      <h2 class="type-display">Что сужает вилку</h2>
       <table class="levels" id="levels">
-        <tr data-level="words"><td>±<span></span> %</td><td><b>Customer's word.</b> Rack count, ports per rack, media type, new or live hall.</td></tr>
-        <tr data-level="plan"><td>±<span></span> %</td><td><b>Hall floor plan.</b> Rows, meet-me room, route lengths, meters of tray, length bands.</td></tr>
-        <tr data-level="p2p"><td>±<span></span> %</td><td><b>Port-to-port schedule.</b> Cable and bundle schedule, firm price.</td></tr>
+        <tr data-level="words"><td>±<span></span> %</td><td><b>Со слов заказчика.</b> Число стоек, портов на стойку, тип среды, новый или действующий зал.</td></tr>
+        <tr data-level="plan"><td>±<span></span> %</td><td><b>По плану зала.</b> Ряды, кроссовая, длины трасс, метры лотка, полосы длин.</td></tr>
+        <tr data-level="p2p"><td>±<span></span> %</td><td><b>По схеме порт-порт.</b> Кабельный журнал и пучки, твёрдая цена.</td></tr>
       </table>
     </div>
     <div>
-      <h2 class="type-display">What lowers the price</h2>
+      <h2 class="type-display">Что снижает цену</h2>
       <ul>
-        <li>Pre-terminated trunks instead of field termination.</li>
-        <li>Racks pre-built with PDUs and sensors at the factory.</li>
-        <li>Daytime access before the hall goes live.</li>
-        <li>Overhead pathways instead of raised floor.</li>
-        <li>Staging at or near the site instead of hauling every load from the warehouse.</li>
-        <li>A floor plan before the first meeting: straight to the second level of estimate.</li>
+        <li>Предтерминированные транки вместо разделки на месте.</li>
+        <li>Стойки, собранные с PDU и датчиками на заводе.</li>
+        <li>Доступ днём, пока зал ещё не запущен.</li>
+        <li>Верхние трассы вместо фальшпола.</li>
+        <li>Склад на объекте или рядом вместо возки каждого рейса со склада.</li>
+        <li>План зала до первой встречи: сразу второй уровень оценки.</li>
       </ul>
     </div>
   </section>
 
-  <footer class="footer">
+  <footer class="footer" lang="ru">
     <p id="footer"></p>
-    <p>From the estimate to first boot.</p>
+    <p>От сметы до первого запуска.</p>
   </footer>
 </div>
 <div class="toast" id="toast" role="status"></div>
@@ -733,14 +746,14 @@
     el('cHeight').textContent = mult(num(R.coef.height, 1));
     el('cNight').textContent = mult(num(R.coef.night, 1));
     el('cRaised').textContent = mult(num(R.coef.raised, 1));
-    el('coefNote').innerHTML = 'live hall <b>' + esc(mult(num(R.coef.live, 1))) + '</b> together with night windows <b>' + esc(mult(num(R.coef.night, 1))) + '</b> gives <b>' + esc(mult(num(R.coef.live, 1) * num(R.coef.night, 1))) + '</b>.';
+    el('coefNote').innerHTML = 'действующий зал <b>' + esc(mult(num(R.coef.live, 1))) + '</b> вместе с ночными окнами <b>' + esc(mult(num(R.coef.night, 1))) + '</b> дают <b>' + esc(mult(num(R.coef.live, 1) * num(R.coef.night, 1))) + '</b>.';
 
     var len = Math.max(1, num(Q.avgLen, 1));
     el('bandHint').textContent = len > 100 ? 'band: up to 100 m + ' + fmtInt.format(len - 100) + ' m over' : 'band: ' + BAND_NAME[band(len)];
     el('trayHint').textContent = 'estimate from racks: ' + fmtInt.format(c.racks * 3 + 40) + ' m';
     el('loadsHint').textContent = 'estimate from racks: ' + fmtInt.format(c.loadsEst) + ' ' + (c.loadsEst === 1 ? 'load' : 'loads') + ' at ' + fmtInt.format(num(R.racksPerLoad, 1)) + ' per truck';
 
-    el('rateBadge').textContent = custom ? 'your rates' : 'example';
+    el('rateBadge').textContent = custom ? 'ваши ставки' : 'пример';
     el('rateBadge').className = 'badge' + (custom ? ' custom' : '');
     el('rateNote').textContent = custom
       ? 'Contractor rates' + (R.company ? ': ' + R.company : '') + '. Labor only, no materials, no power up to the PDU.'
@@ -758,7 +771,7 @@
     });
 
     el('footer').textContent = (R.company ? R.company + ' · ' : '') +
-      'rack, pathway and structured cabling labor · rates exclude materials · a rough estimate is not an offer';
+      'монтаж стоек, трасс и СКС · ставки без материалов · грубая оценка не является офертой';
 
     save();
   }
@@ -840,14 +853,14 @@
     el('linkOut').value = url;
     try { history.replaceState(null, '', '#s=' + url.split('#s=')[1]); } catch (e) {}
     if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(url).then(function () { toast('Link copied'); }, function () { el('linkOut').select(); toast('Copy the link from the field'); });
-    } else { el('linkOut').select(); toast('Copy the link from the field'); }
+      navigator.clipboard.writeText(url).then(function () { toast('Ссылка скопирована'); }, function () { el('linkOut').select(); toast('Скопируйте ссылку из поля'); });
+    } else { el('linkOut').select(); toast('Скопируйте ссылку из поля'); }
   });
   el('resetRates').addEventListener('click', function () {
     R = clone(DEFAULT_RATES);
     fillInputs();
     render();
-    toast('Example rates restored');
+    toast('Возвращены примерные ставки');
   });
 
   load();
