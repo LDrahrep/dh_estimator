@@ -1,0 +1,859 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#0a0a0c">
+<title>Racks, Links, Meters</title>
+<meta name="description" content="Rough labor estimate for rack installation, cable pathways and structured cabling: questionnaire, cost bracket and an editable unit-rate price list. Demo.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ISTOK Group">
+<meta property="og:title" content="Racks, Links, Meters">
+<meta property="og:description" content="Rough labor estimate for rack installation, cable pathways and structured cabling: questionnaire, cost bracket and an editable unit-rate price list. Demo.">
+<meta property="og:image" content="/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+  :root {
+    color-scheme: dark;
+    --void: #0a0a0c;
+    --stage: #141317;
+    --panel: #1a191f;
+    --slate: #26252c;
+    --hair: #33323a;
+    --hair-60: rgba(51, 50, 58, .6);
+    --ink: #ededf0;
+    --ink-soft: #9a99a3;
+    --ink-mute: #8a8994;
+    --gold: #c9b37e;
+    --gold-hi: #e3d3a3;
+    --gold-deep: #8f7b52;
+    --gold-10: rgba(201, 179, 126, .10);
+    --gold-24: rgba(201, 179, 126, .24);
+    --sans: "Archivo", "Helvetica Neue", Arial, sans-serif;
+    --mono: "IBM Plex Mono", "SF Mono", Menlo, Consolas, monospace;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--void);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 15px;
+    line-height: 1.5;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+  }
+  .page { max-width: 1200px; margin: 0 auto; padding: 0 40px 72px; }
+
+  .type-display { font-family: var(--sans); font-stretch: 125%; font-weight: 620; text-transform: uppercase; letter-spacing: .01em; line-height: .94; }
+  .type-meta { font-family: var(--mono); text-transform: uppercase; letter-spacing: .12em; font-size: 13px; font-weight: 400; color: var(--ink-mute); }
+  .num { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+
+  /* ---------- nav ---------- */
+  .nav { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 22px 0; }
+  .brand { display: inline-flex; align-items: center; gap: 12px; color: var(--ink); text-decoration: none; }
+  .brand svg { height: 28px; width: auto; color: var(--gold); }
+  .brand span { font-family: var(--mono); font-size: 13px; letter-spacing: .16em; text-transform: uppercase; }
+  .state { font-family: var(--mono); font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-soft); background: var(--stage); border: 1px solid var(--hair); padding: 8px 14px; white-space: nowrap; }
+  .state b { font-weight: 400; color: var(--gold); }
+
+  /* ---------- hero ---------- */
+  .hero { padding: 40px 0 36px; border-bottom: 1px solid var(--hair); margin-bottom: 32px; position: relative; }
+  .hero::before { content: ""; position: absolute; inset: 0 -40px; background-image: radial-gradient(circle, #33323a 1px, transparent 1.2px); background-size: 12px 12px; opacity: .35; pointer-events: none; -webkit-mask-image: linear-gradient(90deg, transparent 45%, #000 100%); mask-image: linear-gradient(90deg, transparent 45%, #000 100%); }
+  .hero > * { position: relative; }
+  .eyebrow { font-family: var(--mono); font-size: 12px; letter-spacing: .18em; text-transform: uppercase; color: var(--ink-mute); margin: 0 0 18px; }
+  h1 { font-size: clamp(38px, 5.6vw, 64px); margin: 0 0 18px; max-width: 14ch; text-wrap: balance; }
+  .lede { max-width: 58ch; margin: 0; color: var(--ink-soft); font-size: 17px; line-height: 1.55; }
+  .units { margin: 22px 0 0; display: flex; flex-wrap: wrap; gap: 8px 28px; }
+  .units span { font-family: var(--mono); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-mute); }
+  .units span b { font-weight: 400; color: var(--ink); }
+
+  /* ---------- workspace ---------- */
+  .work { display: grid; grid-template-columns: minmax(0, 1fr) 420px; gap: 24px; align-items: start; }
+  .sheet { background: var(--stage); border: 1px solid var(--hair); }
+  .sheet-title { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; padding: 16px 24px; border-bottom: 1px solid var(--hair); }
+  h2 { font-size: 22px; margin: 0; }
+  .hint { font-size: 13px; color: var(--ink-mute); font-family: var(--mono); letter-spacing: .02em; }
+
+  fieldset { border: 0; margin: 0; padding: 20px 24px 22px; border-bottom: 1px solid var(--hair-60); }
+  fieldset:last-of-type { border-bottom: 0; }
+  legend { font-family: var(--mono); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-mute); padding: 0; margin-bottom: 14px; float: left; width: 100%; }
+  legend b { font-weight: 400; color: var(--gold); margin-right: 10px; }
+  .grid { display: grid; gap: 14px 18px; clear: both; }
+  .g3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .field { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+  .field label { font-size: 13px; color: var(--ink-soft); }
+  .field small { font-size: 11px; color: var(--ink-mute); font-family: var(--mono); letter-spacing: .02em; }
+  input[type="number"], input[type="text"], select {
+    width: 100%; font: inherit; font-family: var(--mono); font-size: 14px;
+    padding: 10px 12px; color: var(--ink); background: transparent;
+    border: 1px solid var(--hair); border-radius: 0; min-width: 0;
+    font-variant-numeric: tabular-nums; transition: border-color .3s;
+  }
+  select { font-family: var(--sans); background: var(--stage); }
+  input:hover, select:hover { border-color: var(--gold-deep); }
+  input:focus-visible, select:focus-visible { outline: none; border-color: var(--gold); }
+  button:focus-visible { outline: 1px solid var(--gold); outline-offset: 2px; }
+  .with-btn { display: grid; grid-template-columns: 1fr auto; gap: 6px; }
+
+  .sw-row { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px 28px; clear: both; }
+  .sw { display: flex; align-items: center; gap: 12px; cursor: pointer; padding: 2px 0; }
+  .sw input { appearance: none; -webkit-appearance: none; width: 36px; height: 18px; border-radius: 0; background: var(--void); border: 1px solid var(--hair); position: relative; margin: 0; flex: none; cursor: pointer; transition: border-color .3s, background .3s; }
+  .sw input::after { content: ""; position: absolute; top: 2px; left: 2px; width: 12px; height: 12px; background: var(--ink-mute); transition: transform .2s, background .3s; }
+  .sw input:checked { border-color: var(--gold); background: var(--gold-10); }
+  .sw input:checked::after { transform: translateX(18px); background: var(--gold); }
+  .sw input:focus-visible { outline: 1px solid var(--gold); outline-offset: 2px; }
+  .sw span { font-size: 14px; color: var(--ink); }
+  .sw em { font-style: normal; font-family: var(--mono); font-size: 11px; color: var(--ink-mute); margin-left: 8px; letter-spacing: .04em; }
+
+  .tabs { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); clear: both; border-bottom: 1px solid var(--hair); }
+  .tabs input { position: absolute; opacity: 0; width: 0; height: 0; }
+  .tabs label { display: block; padding: 14px 16px 16px; border-top: 1px solid var(--hair); border-right: 1px solid var(--hair-60); cursor: pointer; color: var(--ink-soft); transition: background .3s, border-color .3s, color .3s; }
+  .tabs label:last-of-type { border-right: 0; }
+  .tabs label b { display: block; font-family: var(--mono); font-weight: 400; font-size: 12px; letter-spacing: .1em; color: var(--ink-mute); margin-bottom: 8px; }
+  .tabs label:hover { color: var(--ink); }
+  .tabs input:checked + label { border-top-color: var(--gold); background: var(--panel); color: var(--ink); }
+  .tabs input:checked + label b { color: var(--gold); }
+  .tabs input:focus-visible + label { outline: 1px solid var(--gold); outline-offset: -1px; }
+
+  /* ---------- result ---------- */
+  .result { position: sticky; top: 16px; background: var(--stage); border: 1px solid var(--hair); border-top: 1px solid var(--gold-deep); }
+  .readout-head { display: flex; justify-content: space-between; gap: 12px; padding: 14px 24px; border-bottom: 1px solid var(--hair); }
+  .readout-head span { font-family: var(--mono); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-mute); }
+  .readout-head span b { font-weight: 400; color: var(--gold); }
+  .result-top { padding: 22px 24px 18px; border-bottom: 1px solid var(--hair); }
+  .bracket { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 16px; color: var(--gold-hi); font-size: 40px; font-variant-numeric: tabular-nums; }
+  .bracket .pair { white-space: nowrap; }
+  .bracket small { font-family: var(--mono); font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-mute); margin-right: 8px; font-stretch: 100%; font-weight: 400; }
+  .mid { margin-top: 12px; font-family: var(--mono); font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-mute); }
+  .mid b { color: var(--ink); font-weight: 400; }
+  .tiles { display: grid; grid-template-columns: 1fr 1fr; border-bottom: 1px solid var(--hair); }
+  .tile { padding: 14px 24px; }
+  .tile + .tile { border-left: 1px solid var(--hair); }
+  .tile .k { font-family: var(--mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-mute); }
+  .tile .v { font-size: 26px; margin-top: 6px; color: var(--ink); font-variant-numeric: tabular-nums; }
+  .tile .v small { display: block; font-family: var(--mono); font-size: 11px; color: var(--ink-mute); margin: 4px 0 0; font-stretch: 100%; font-weight: 400; letter-spacing: .06em; text-transform: uppercase; }
+
+  .ledger { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+  .ledger th, .ledger td { padding: 9px 8px; text-align: left; vertical-align: top; border-bottom: 1px solid var(--hair-60); }
+  .ledger th { font-family: var(--mono); font-weight: 400; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-mute); }
+  .ledger td.n, .ledger th.n { text-align: right; font-family: var(--mono); font-variant-numeric: tabular-nums; white-space: nowrap; color: var(--ink); }
+  .ledger td.name { color: var(--ink); }
+  .ledger td.name small { display: block; color: var(--ink-mute); font-family: var(--mono); font-size: 11px; margin-top: 2px; }
+  .ledger td.name i { display: block; height: 2px; margin-top: 7px; background: var(--gold); opacity: .85; }
+  .ledger tr.muted td, .ledger tr.muted td.n { color: var(--ink-soft); }
+  .ledger tr.sum td { border-bottom: 0; border-top: 1px solid var(--gold-deep); color: var(--gold-hi); }
+  .ledger tr.sum td.n { color: var(--gold-hi); font-weight: 500; }
+  .ledger-wrap { padding: 8px 16px 12px; overflow-x: auto; }
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; padding: 4px 24px 16px; }
+  .chip { font-family: var(--mono); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; padding: 4px 9px; border: 1px solid var(--hair); color: var(--ink-mute); }
+  .chip.on { border-color: var(--gold); color: var(--gold); background: var(--gold-10); }
+  .foot-note { padding: 12px 24px 16px; font-size: 12px; color: var(--ink-mute); border-top: 1px solid var(--hair); font-family: var(--mono); letter-spacing: .02em; }
+
+  /* ---------- rates ---------- */
+  .rates { margin-top: 32px; }
+  .rates .sheet-title { position: sticky; top: 0; background: var(--stage); z-index: 1; }
+  .badge { font-family: var(--mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; padding: 5px 10px; border: 1px solid var(--hair); color: var(--ink-mute); }
+  .badge.custom { border-color: var(--gold); color: var(--gold); background: var(--gold-10); }
+  .rates-body { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .rates-body > section { padding: 20px 24px 22px; border-bottom: 1px solid var(--hair-60); }
+  .rates-body > section:nth-child(odd) { border-right: 1px solid var(--hair-60); }
+  .rates-body h3 { font-family: var(--mono); font-weight: 400; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-mute); margin: 0 0 14px; }
+  .rates-body .note { margin: -6px 0 14px; max-width: 62ch; font-size: 13px; line-height: 1.5; color: var(--ink-soft); }
+  .rates-body .note b { font-weight: 400; color: var(--gold); font-family: var(--mono); font-size: 12px; }
+  .rt td small { line-height: 1.45; max-width: 46ch; }
+  .rt { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .rt th, .rt td { padding: 6px 6px; border-bottom: 1px solid var(--hair-60); vertical-align: middle; }
+  .rt th { font-family: var(--mono); font-weight: 400; font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-mute); text-align: left; }
+  .rt th.n { text-align: right; }
+  .rt td:first-child { color: var(--ink); }
+  .rt td small { display: block; color: var(--ink-mute); font-family: var(--mono); font-size: 11px; margin-top: 2px; }
+  .rt input { padding: 6px 8px; font-size: 13px; text-align: right; }
+  .rt td.i { width: 112px; }
+  .rt td.iu { width: 178px; }
+  .rt th small { display: block; margin-top: 4px; font-size: 11px; letter-spacing: .06em; color: var(--ink-soft); text-transform: none; }
+  .rt .ic { display: flex; align-items: center; justify-content: flex-end; gap: 10px; }
+  .rt .ic input { width: 88px; }
+  .rt .u { font-family: var(--mono); font-size: 11px; letter-spacing: .06em; color: var(--ink-mute); white-space: nowrap; }
+  .rt-wrap { overflow-x: auto; }
+  .rates-actions { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: 12px; align-items: center; padding: 18px 24px; }
+  .btn { font-family: var(--mono); font-size: 13px; letter-spacing: .12em; text-transform: uppercase; padding: 12px 20px; border: 1px solid var(--hair); background: transparent; color: var(--ink); cursor: pointer; transition: border-color .3s, color .3s, background .3s; }
+  .btn:hover { border-color: var(--gold); color: var(--gold-hi); }
+  .btn.primary { border-color: var(--gold-deep); color: var(--gold-hi); }
+  .btn.primary:hover { border-color: var(--gold); background: var(--gold-10); }
+  .btn.small { padding: 8px 12px; font-size: 11px; letter-spacing: .1em; }
+  .linkbox { flex: 1 1 320px; display: flex; gap: 6px; }
+  .linkbox input { font-size: 12px; color: var(--ink-soft); }
+  .toast { position: fixed; left: 50%; bottom: 24px; transform: translateX(-50%); background: var(--slate); border: 1px solid var(--hair); color: var(--ink); padding: 10px 16px; font-family: var(--mono); font-size: 12px; letter-spacing: .1em; text-transform: uppercase; opacity: 0; pointer-events: none; transition: opacity .2s; z-index: 10; }
+  .toast.show { opacity: 1; }
+
+  /* ---------- terms ---------- */
+  .terms { margin-top: 40px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px; }
+  .terms > div { border-top: 1px solid var(--hair); padding-top: 18px; }
+  .terms h2 { font-size: 18px; margin-bottom: 14px; }
+  .terms ul { margin: 0; padding-left: 0; list-style: none; color: var(--ink-soft); font-size: 14px; }
+  .terms li { margin-bottom: 8px; padding-left: 20px; position: relative; }
+  .terms li::before { content: "→"; position: absolute; left: 0; color: var(--gold-deep); font-family: var(--mono); }
+  .levels { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .levels td { padding: 9px 6px; border-bottom: 1px solid var(--hair-60); vertical-align: top; color: var(--ink-soft); }
+  .levels td:first-child { font-family: var(--mono); white-space: nowrap; color: var(--ink-mute); padding-left: 0; }
+  .levels td b { color: var(--ink); font-weight: 500; }
+  .levels tr.cur td { color: var(--ink); }
+  .levels tr.cur td:first-child { color: var(--gold); }
+
+  .footer { margin-top: 48px; padding-top: 18px; border-top: 1px solid var(--hair); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px 24px; align-items: center; }
+  .footer p { margin: 0; font-family: var(--mono); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-mute); }
+
+  @media (max-width: 960px) {
+    .page { padding: 0 24px 56px; }
+    .hero::before { inset: 0 -24px; }
+    .work { grid-template-columns: 1fr; }
+    .result { position: static; }
+    .rates-body { grid-template-columns: 1fr; }
+    .rates-body > section:nth-child(odd) { border-right: 0; }
+    .terms { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 600px) {
+    .page { padding: 0 16px 48px; }
+    .hero::before { inset: 0 -16px; }
+    .g3 { grid-template-columns: 1fr 1fr; }
+    .sw-row { grid-template-columns: 1fr; }
+    .tabs { grid-template-columns: 1fr; }
+    .tabs label { border-right: 0; }
+    .nav { flex-wrap: wrap; }
+    .bracket { font-size: 34px; }
+  }
+  @media print {
+    :root { --void: #fff; --stage: #fff; --panel: #f4f4f5; --slate: #eee; --hair: #bbb; --hair-60: #ccc; --ink: #111; --ink-soft: #444; --ink-mute: #666; --gold: #8f7b52; --gold-hi: #6e5d3a; --gold-deep: #8f7b52; --gold-10: #f3efe4; }
+    .page { max-width: none; padding: 0; }
+    .hero::before, .btn, .toast, .linkbox, .rates-actions { display: none !important; }
+    .work { grid-template-columns: 1fr 1fr; }
+    .sheet, .result { break-inside: avoid; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .sw input, .sw input::after, .toast, .btn, .tabs label, input, select { transition: none; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+  <nav class="nav">
+    <a class="brand" href="https://istokgroup.com/" rel="noopener">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 164 125" fill="none" shape-rendering="geometricPrecision" aria-hidden="true"><g fill="currentColor" stroke="currentColor"><g><line x1="76" y1="13" x2="43" y2="37" stroke-width="9" stroke-linecap="round"></line><line x1="76" y1="13" x2="110" y2="36" stroke-width="9" stroke-linecap="round"></line><line x1="43" y1="37" x2="76" y2="62" stroke-width="9" stroke-linecap="round"></line><line x1="110" y1="36" x2="76" y2="62" stroke-width="9" stroke-linecap="round"></line><line x1="110" y1="36" x2="146" y2="62" stroke-width="9" stroke-linecap="round"></line><line x1="76" y1="62" x2="43" y2="87" stroke-width="9" stroke-linecap="round"></line><line x1="76" y1="62" x2="112" y2="88" stroke-width="9" stroke-linecap="round"></line><line x1="112" y1="88" x2="146" y2="62" stroke-width="9" stroke-linecap="round"></line><line x1="43" y1="87" x2="76" y2="111" stroke-width="9" stroke-linecap="round"></line><line x1="112" y1="88" x2="76" y2="111" stroke-width="9" stroke-linecap="round"></line><circle cx="76" cy="13" r="13.5"></circle><circle cx="43" cy="37" r="12"></circle><circle cx="110" cy="36" r="15"></circle><circle cx="76" cy="62" r="16"></circle><circle cx="146" cy="62" r="17.5"></circle><circle cx="43" cy="87" r="12"></circle><circle cx="112" cy="88" r="15"></circle><circle cx="76" cy="111" r="13.5"></circle></g><circle cx="9" cy="61.5" r="7.5"></circle><path d="M 14 58.2 L 32 60.6 L 60 60.6 L 60 62.9 L 32 62.9 L 14 65.3 Z" stroke="none"></path></g></svg>
+      <span>ISTOK Group</span>
+    </a>
+    <div class="state" id="stateTag"><b>State:</b> Rough · ±40 % · Example rates</div>
+  </nav>
+
+  <header class="hero">
+    <p class="eyebrow">Step 01 · Estimate &amp; takeoff · Pre-contract</p>
+    <h1 class="type-display">Racks, links, meters.</h1>
+    <p class="lede">Fill in the questionnaire from what the customer can tell you today and get a labor cost bracket. The rates in the price list below are editable and travel with the page as a link.</p>
+    <div class="units">
+      <span>Units of account · <b>rack · link · meter</b></span>
+      <span>Materials and power up to the PDU · <b>not included</b></span>
+      <span>Recalculates · <b>as you type</b></span>
+    </div>
+  </header>
+
+  <div class="work">
+    <!-- ================= questionnaire ================= -->
+    <form class="sheet" id="q" onsubmit="return false">
+      <div class="sheet-title">
+        <h2 class="type-display">Questionnaire</h2>
+        <span class="hint">what a customer knows at the first meeting</span>
+      </div>
+
+      <fieldset>
+        <legend><b>01</b>Racks</legend>
+        <div class="grid g3">
+          <div class="field">
+            <label for="racksStd">Standard racks</label>
+            <input type="number" id="racksStd" data-q="racksStd" min="0" step="1" inputmode="numeric">
+            <small>up to 15 kW, up to 1 t</small>
+          </div>
+          <div class="field">
+            <label for="racksHd">High-density racks</label>
+            <input type="number" id="racksHd" data-q="racksHd" min="0" step="1" inputmode="numeric">
+            <small>GPU rows, up to 2.5 t, rigging</small>
+          </div>
+          <div class="field">
+            <label for="rackKit">Fit-out</label>
+            <select id="rackKit" data-q="rackKit">
+              <option value="empty">Empty rack</option>
+              <option value="pdu">With PDUs and sensors</option>
+              <option value="prefilled">Pre-populated</option>
+            </select>
+            <small>placement, anchoring, grounding, blanking panels</small>
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend><b>02</b>Links per rack</legend>
+        <div class="grid g3">
+          <div class="field">
+            <label for="cuPerRack">Copper Cat6A</label>
+            <input type="number" id="cuPerRack" data-q="cuPerRack" min="0" step="1" inputmode="numeric">
+          </div>
+          <div class="field">
+            <label for="lcPerRack">Fiber LC</label>
+            <input type="number" id="lcPerRack" data-q="lcPerRack" min="0" step="1" inputmode="numeric">
+          </div>
+          <div class="field">
+            <label for="mpoPerRack">MPO trunks</label>
+            <input type="number" id="mpoPerRack" data-q="mpoPerRack" min="0" step="1" inputmode="numeric">
+          </div>
+        </div>
+        <div class="grid g3" style="margin-top:14px">
+          <div class="field">
+            <label for="avgLen">Average link length, m</label>
+            <input type="number" id="avgLen" data-q="avgLen" min="1" step="1" inputmode="numeric">
+            <small id="bandHint">band: up to 50 m</small>
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend><b>03</b>Cable pathways</legend>
+        <div class="grid g3">
+          <div class="field">
+            <label for="trayM">Tray or ladder, m</label>
+            <div class="with-btn">
+              <input type="number" id="trayM" data-q="trayM" min="0" step="1" inputmode="numeric">
+              <button type="button" class="btn small" id="estTray" title="3 m per rack plus 40 m to the meet-me room">from racks</button>
+            </div>
+            <small id="trayHint">estimate from racks: 3 m per rack + 40 m</small>
+          </div>
+          <div class="field">
+            <label for="tiers">Tiers</label>
+            <select id="tiers" data-q="tiers">
+              <option value="1">1 tier</option>
+              <option value="2">2 tiers, stacked</option>
+              <option value="3">3 tiers</option>
+            </select>
+            <small>power and data on separate tiers</small>
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend><b>04</b>Site conditions and services</legend>
+        <div class="sw-row">
+          <label class="sw"><input type="checkbox" data-q="live" id="live"><span>Live data hall <em id="cLive"></em></span></label>
+          <label class="sw"><input type="checkbox" data-q="height" id="height"><span>Pathways above 3 m <em id="cHeight"></em></span></label>
+          <label class="sw"><input type="checkbox" data-q="night" id="night"><span>Night windows, weekends <em id="cNight"></em></span></label>
+          <label class="sw"><input type="checkbox" data-q="raised" id="raised"><span>Under raised floor <em id="cRaised"></em></span></label>
+          <label class="sw"><input type="checkbox" data-q="cert" id="cert"><span>Link certification</span></label>
+          <label class="sw"><input type="checkbox" data-q="docs" id="docs"><span>As-built documentation</span></label>
+        </div>
+        <p class="hint" style="margin:14px 0 0; clear: both">Multipliers apply to labor lines only and compound when several are on. Each one is explained in the price list below.</p>
+      </fieldset>
+
+      <fieldset>
+        <legend><b>05</b>Logistics</legend>
+        <div class="grid g3">
+          <div class="field">
+            <label for="distMi">Warehouse to site, mi</label>
+            <input type="number" id="distMi" data-q="distMi" min="0" step="1" inputmode="numeric">
+            <small>0 = staged on site, no transport line</small>
+          </div>
+          <div class="field">
+            <label for="loads">Truckloads</label>
+            <div class="with-btn">
+              <input type="number" id="loads" data-q="loads" min="0" step="1" inputmode="numeric">
+              <button type="button" class="btn small" id="estLoads" title="racks divided by racks per truckload, rounded up">from racks</button>
+            </div>
+            <small id="loadsHint">estimate from racks: 5 loads</small>
+          </div>
+        </div>
+        <p class="hint" style="margin:14px 0 0; clear: both">Each truckload is one rental day plus mileage both ways. Not subject to site multipliers.</p>
+      </fieldset>
+
+      <fieldset>
+        <legend><b>06</b>Where the numbers come from</legend>
+        <div class="tabs" role="radiogroup" aria-label="Where the numbers come from">
+          <input type="radio" name="level" id="lvWords" value="words" data-q="level"><label for="lvWords"><b>01</b>Customer's word</label>
+          <input type="radio" name="level" id="lvPlan" value="plan" data-q="level"><label for="lvPlan"><b>02</b>Hall floor plan</label>
+          <input type="radio" name="level" id="lvP2p" value="p2p" data-q="level"><label for="lvP2p"><b>03</b>Port-to-port schedule</label>
+        </div>
+        <p class="hint" style="margin:12px 0 0">The width of the bracket depends on how well the inputs are confirmed.</p>
+      </fieldset>
+    </form>
+
+    <!-- ================= result ================= -->
+    <aside class="result" aria-live="polite">
+      <div class="readout-head">
+        <span>Estimate · <b id="levelName">Rough</b></span>
+        <span id="levelSpread">±40 %</span>
+      </div>
+      <div class="result-top">
+        <div class="bracket type-display"><span class="pair"><small>from</small><span id="low">—</span></span><span class="pair"><small>to</small><span id="high">—</span></span></div>
+        <div class="mid">midpoint <b id="mid">—</b> · labor only</div>
+      </div>
+      <div class="tiles">
+        <div class="tile"><div class="k">per rack</div><div class="v type-display" id="perRack">—</div></div>
+        <div class="tile"><div class="k">per link</div><div class="v type-display" id="perLink">—</div></div>
+      </div>
+      <div class="ledger-wrap">
+        <table class="ledger">
+          <thead><tr><th>Line</th><th class="n">Qty</th><th class="n">Rate</th><th class="n">Amount</th></tr></thead>
+          <tbody id="ledger"></tbody>
+        </table>
+      </div>
+      <div class="chips" id="chips"></div>
+      <div class="foot-note" id="rateNote">Example rates. Replace them with yours in the price list below.</div>
+    </aside>
+  </div>
+
+  <!-- ================= rates ================= -->
+  <section class="sheet rates" id="rates">
+    <div class="sheet-title">
+      <h2 class="type-display">Price list · unit rates</h2>
+      <span class="badge" id="rateBadge">example</span>
+    </div>
+    <div class="rates-body">
+      <section>
+        <h3>Rack, turnkey</h3>
+        <div class="rt-wrap"><table class="rt">
+          <thead><tr><th>Fit-out</th><th class="n">rate</th></tr></thead>
+          <tbody>
+            <tr><td>Empty rack<small>unloading, placement, leveling, anchoring, grounding, labeling</small></td><td class="i iu"><span class="ic"><span class="u" data-u="{c} / rack"></span><input type="number" data-r="rack.empty" min="0"></span></td></tr>
+            <tr><td>With PDUs and sensors<small>plus PDUs, sensors, blanking panels, cable managers</small></td><td class="i iu"><span class="ic"><span class="u" data-u="{c} / rack"></span><input type="number" data-r="rack.pdu" min="0"></span></td></tr>
+            <tr><td>Pre-populated<small>plus customer equipment installed per the rack elevation</small></td><td class="i iu"><span class="ic"><span class="u" data-u="{c} / rack"></span><input type="number" data-r="rack.prefilled" min="0"></span></td></tr>
+            <tr><td>High-density rack<small>Multiplier on the rack rate. Up to 2.5 t: rigging and extra hands to roll it in. 4–8 PDUs instead of two, heavy power cords, more blanking panels and cable managers. Roughly one and a half standard racks of labor.</small></td><td class="i iu"><span class="ic"><span class="u" data-u="× on rack rate"></span><input type="number" data-r="hdMult" min="1" step="0.05"></span></td></tr>
+          </tbody>
+        </table></div>
+      </section>
+
+      <section>
+        <h3>Link, port to port · pull, two terminations, labeling</h3>
+        <div class="rt-wrap"><table class="rt">
+          <thead><tr><th>Media</th><th class="n">up to 15 m<small data-u="{c} / link"></small></th><th class="n">up to 50 m<small data-u="{c} / link"></small></th><th class="n">up to 100 m<small data-u="{c} / link"></small></th><th class="n">over 100 m<small data-u="{c} / m extra"></small></th></tr></thead>
+          <tbody>
+            <tr><td>Copper Cat6A</td><td class="i"><input type="number" data-r="link.cu.0" min="0"></td><td class="i"><input type="number" data-r="link.cu.1" min="0"></td><td class="i"><input type="number" data-r="link.cu.2" min="0"></td><td class="i"><input type="number" data-r="over.cu" min="0"></td></tr>
+            <tr><td>Fiber LC</td><td class="i"><input type="number" data-r="link.lc.0" min="0"></td><td class="i"><input type="number" data-r="link.lc.1" min="0"></td><td class="i"><input type="number" data-r="link.lc.2" min="0"></td><td class="i"><input type="number" data-r="over.lc" min="0"></td></tr>
+            <tr><td>MPO trunk<small>pre-terminated, each</small></td><td class="i"><input type="number" data-r="link.mpo.0" min="0"></td><td class="i"><input type="number" data-r="link.mpo.1" min="0"></td><td class="i"><input type="number" data-r="link.mpo.2" min="0"></td><td class="i"><input type="number" data-r="over.mpo" min="0"></td></tr>
+          </tbody>
+        </table></div>
+      </section>
+
+      <section>
+        <h3>Pathways and certification</h3>
+        <div class="rt-wrap"><table class="rt">
+          <thead><tr><th>Unit</th><th class="n">rate</th></tr></thead>
+          <tbody>
+            <tr><td>Meter of tray or ladder, per tier<small>hangers, bends, drops to racks</small></td><td class="i iu"><span class="ic"><span class="u" data-u="{c} / m"></span><input type="number" data-r="tray" min="0"></span></td></tr>
+            <tr><td>Certification, copper, per link</td><td class="i iu"><span class="ic"><span class="u" data-u="{c} / link"></span><input type="number" data-r="cert.cu" min="0"></span></td></tr>
+            <tr><td>Certification, fiber LC, per link</td><td class="i iu"><span class="ic"><span class="u" data-u="{c} / link"></span><input type="number" data-r="cert.lc" min="0"></span></td></tr>
+            <tr><td>Certification, MPO trunk, each</td><td class="i iu"><span class="ic"><span class="u" data-u="{c} / trunk"></span><input type="number" data-r="cert.mpo" min="0"></span></td></tr>
+          </tbody>
+        </table></div>
+      </section>
+
+      <section>
+        <h3>Project lines and brackets</h3>
+        <div class="rt-wrap"><table class="rt">
+          <thead><tr><th>Unit</th><th class="n">value</th></tr></thead>
+          <tbody>
+            <tr><td>As-built documentation<small>per project, per 50 racks</small></td><td class="i iu"><span class="ic"><span class="u" data-u="{c} / project"></span><input type="number" data-r="docs" min="0"></span></td></tr>
+            <tr><td>Mobilization<small>badges, tools, site setup. Vehicles are priced in the transport lines below.</small></td><td class="i iu"><span class="ic"><span class="u" data-u="{c} / project"></span><input type="number" data-r="mob" min="0"></span></td></tr>
+            <tr><td>Truck rental, per load-day<small>When the warehouse and the site are apart: one rental day per truckload, racks and tools out, empties back.</small></td><td class="i iu"><span class="ic"><span class="u" data-u="{c} / load-day"></span><input type="number" data-r="truckDay" min="0"></span></td></tr>
+            <tr><td>Mileage, per mile<small>Applied to the round trip of every truckload: fuel, tolls, driver time.</small></td><td class="i iu"><span class="ic"><span class="u" data-u="{c} / mi"></span><input type="number" data-r="perMile" min="0" step="0.1"></span></td></tr>
+            <tr><td>Racks per truckload<small>Box truck capacity used to estimate the number of loads from the rack count.</small></td><td class="i iu"><span class="ic"><span class="u" data-u="racks / load"></span><input type="number" data-r="racksPerLoad" min="1" step="1"></span></td></tr>
+            <tr><td>Contingency, %<small>Added to the subtotal for the unforeseen: an extra drop, relabeling, waiting for access.</small></td><td class="i iu"><span class="ic"><span class="u" data-u="% of subtotal"></span><input type="number" data-r="contingency" min="0" max="100"></span></td></tr>
+            <tr><td>Bracket “customer's word”, ±%<small>Half-width of the bracket around the midpoint when the inputs are told, not drawn: rack count, ports per rack, media, new or live hall.</small></td><td class="i iu"><span class="ic"><span class="u" data-u="± %"></span><input type="number" data-r="spread.words" min="0" max="100"></span></td></tr>
+            <tr><td>Bracket “hall floor plan”, ±%<small>Rows, meet-me room and route lengths taken from the floor plan.</small></td><td class="i iu"><span class="ic"><span class="u" data-u="± %"></span><input type="number" data-r="spread.plan" min="0" max="100"></span></td></tr>
+            <tr><td>Bracket “port-to-port schedule”, ±%<small>Cable and bundle schedule per port. This is the firm price.</small></td><td class="i iu"><span class="ic"><span class="u" data-u="± %"></span><input type="number" data-r="spread.p2p" min="0" max="100"></span></td></tr>
+          </tbody>
+        </table></div>
+      </section>
+
+      <section>
+        <h3>Site condition multipliers · applied to labor</h3>
+        <p class="note">Applied to the labor lines only: racks, links, trunks, pathways and certification. Documentation and mobilization stay flat. When several conditions are on, the multipliers compound: <span id="coefNote"></span></p>
+        <div class="rt-wrap"><table class="rt">
+          <thead><tr><th>Condition</th><th class="n">multiplier</th></tr></thead>
+          <tbody>
+            <tr><td>Live data hall<small>Working next to the customer's powered equipment: escorts and permits, no dust or noise, aisles stay clear, every cable is pulled slower and with more care, and a slip can take down someone else's link. Usually the heaviest multiplier.</small></td><td class="i iu"><span class="ic"><span class="u" data-u="× on labor"></span><input type="number" data-r="coef.live" min="1" step="0.05"></span></td></tr>
+            <tr><td>Pathways above 3 m<small>A lift or scaffold, fall protection and a second person on the floor. Fewer meters of tray per hour.</small></td><td class="i iu"><span class="ic"><span class="u" data-u="× on labor"></span><input type="number" data-r="coef.height" min="1" step="0.05"></span></td></tr>
+            <tr><td>Night windows, weekends<small>Crew premium for nights and weekends, short work windows with idle time between them, after-hours site access.</small></td><td class="i iu"><span class="ic"><span class="u" data-u="× on labor"></span><input type="number" data-r="coef.night" min="1" step="0.05"></span></td></tr>
+            <tr><td>Under raised floor<small>Lifting and replacing tiles, working prone, cable is harder to see and slower to label than in an open overhead tray.</small></td><td class="i iu"><span class="ic"><span class="u" data-u="× on labor"></span><input type="number" data-r="coef.raised" min="1" step="0.05"></span></td></tr>
+          </tbody>
+        </table></div>
+      </section>
+
+      <section>
+        <h3>Currency and signature</h3>
+        <div class="rt-wrap"><table class="rt">
+          <tbody>
+            <tr><td>Currency sign<small>Drives every rate label and total on the page. A single symbol goes before the number, a code goes after. Changing it does not convert the figures.</small></td><td class="i"><input type="text" data-r="cur" maxlength="6"></td></tr>
+            <tr><td>Contractor<small>shown in the footer</small></td><td class="i" style="width:220px"><input type="text" data-r="company" maxlength="60"></td></tr>
+          </tbody>
+        </table></div>
+      </section>
+
+      <div class="rates-actions">
+        <button type="button" class="btn primary" id="copyLink">Copy link with these rates</button>
+        <button type="button" class="btn" id="resetRates">Restore example rates</button>
+        <div class="linkbox"><input type="text" id="linkOut" readonly aria-label="Link with rates" placeholder="the link will appear here"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= terms ================= -->
+  <section class="terms">
+    <div>
+      <h2 class="type-display">Not included</h2>
+      <ul>
+        <li>Active equipment and its configuration.</li>
+        <li>Cable, trunks, trays and hardware as materials: separate bill of materials.</li>
+        <li>Power up to the PDU, busway, UPS.</li>
+        <li>General contractor scope: floor, ceiling, fire suppression.</li>
+        <li>Rigging through non-standard openings.</li>
+      </ul>
+    </div>
+    <div>
+      <h2 class="type-display">What narrows the bracket</h2>
+      <table class="levels" id="levels">
+        <tr data-level="words"><td>±<span></span> %</td><td><b>Customer's word.</b> Rack count, ports per rack, media type, new or live hall.</td></tr>
+        <tr data-level="plan"><td>±<span></span> %</td><td><b>Hall floor plan.</b> Rows, meet-me room, route lengths, meters of tray, length bands.</td></tr>
+        <tr data-level="p2p"><td>±<span></span> %</td><td><b>Port-to-port schedule.</b> Cable and bundle schedule, firm price.</td></tr>
+      </table>
+    </div>
+    <div>
+      <h2 class="type-display">What lowers the price</h2>
+      <ul>
+        <li>Pre-terminated trunks instead of field termination.</li>
+        <li>Racks pre-built with PDUs and sensors at the factory.</li>
+        <li>Daytime access before the hall goes live.</li>
+        <li>Overhead pathways instead of raised floor.</li>
+        <li>Staging at or near the site instead of hauling every load from the warehouse.</li>
+        <li>A floor plan before the first meeting: straight to the second level of estimate.</li>
+      </ul>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <p id="footer"></p>
+    <p>From the estimate to first boot.</p>
+  </footer>
+</div>
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+(function () {
+  'use strict';
+
+  var DEFAULT_RATES = {
+    cur: '$',
+    company: 'ISTOK Group',
+    rack: { empty: 350, pdu: 550, prefilled: 900 },
+    hdMult: 1.6,
+    link: { cu: [90, 120, 160], lc: [130, 170, 220], mpo: [180, 240, 320] },
+    over: { cu: 2, lc: 3, mpo: 4 },
+    tray: 60,
+    cert: { cu: 12, lc: 18, mpo: 50 },
+    docs: 2000,
+    mob: 1500,
+    truckDay: 250,
+    perMile: 1.2,
+    racksPerLoad: 8,
+    contingency: 10,
+    spread: { words: 40, plan: 20, p2p: 10 },
+    coef: { live: 1.3, height: 1.15, night: 1.25, raised: 1.1 }
+  };
+  var DEFAULT_Q = {
+    racksStd: 32, racksHd: 8, rackKit: 'pdu',
+    cuPerRack: 24, lcPerRack: 24, mpoPerRack: 2, avgLen: 35,
+    trayM: 160, tiers: 2,
+    distMi: 45, loads: 5,
+    live: false, height: false, night: false, raised: false,
+    cert: true, docs: true,
+    level: 'words'
+  };
+  var KIT_NAME = { empty: 'empty', pdu: 'with PDUs and sensors', prefilled: 'pre-populated' };
+  var LEVEL_NAME = { words: 'Rough', plan: 'Budgetary', p2p: 'Firm' };
+  var BAND_NAME = ['up to 15 m', 'up to 50 m', 'up to 100 m'];
+  var STORE = 'rack-estimator-istok-v1';
+
+  var R = clone(DEFAULT_RATES);
+  var Q = clone(DEFAULT_Q);
+
+  function clone(o) { return JSON.parse(JSON.stringify(o)); }
+  function getPath(o, p) { return p.split('.').reduce(function (a, k) { return a == null ? a : a[k]; }, o); }
+  function setPath(o, p, v) {
+    var ks = p.split('.'), last = ks.pop();
+    var t = ks.reduce(function (a, k) { if (a[k] == null) a[k] = {}; return a[k]; }, o);
+    t[last] = v;
+  }
+  function merge(base, over) {
+    if (!over || typeof over !== 'object') return base;
+    Object.keys(over).forEach(function (k) {
+      if (over[k] && typeof over[k] === 'object' && !Array.isArray(over[k]) && base[k] && typeof base[k] === 'object') merge(base[k], over[k]);
+      else if (over[k] !== undefined) base[k] = over[k];
+    });
+    return base;
+  }
+  function num(v, d) { var n = parseFloat(v); return isFinite(n) ? n : d; }
+
+  var fmtInt = new Intl.NumberFormat('en-US', { maximumFractionDigits: 0 });
+  var fmt2 = new Intl.NumberFormat('en-US', { maximumFractionDigits: 2 });
+  function withCur(s) { return R.cur.length <= 1 ? R.cur + s : s + ' ' + R.cur; }
+  function money(v) { return withCur(fmtInt.format(Math.round(v))); }
+  function moneyShort(v) {
+    var a = Math.abs(v);
+    if (a >= 1e6) return withCur(fmt2.format(Math.round(v / 1e4) / 100) + 'M');
+    if (a >= 1e4) return withCur(fmtInt.format(Math.round(v / 1e3)) + 'K');
+    return money(v);
+  }
+  function mult(v) { return '×' + fmt2.format(v); }
+
+  /* ---------- band by average length ---------- */
+  function band(len) { return len <= 15 ? 0 : len <= 50 ? 1 : 2; }
+  function linkRate(kind, len) {
+    var b = band(len);
+    var base = num(R.link[kind][b], 0);
+    if (len > 100) base += (len - 100) * num(R.over[kind], 0);
+    return base;
+  }
+
+  /* ---------- calculation ---------- */
+  function calc() {
+    var racks = num(Q.racksStd, 0) + num(Q.racksHd, 0);
+    var len = Math.max(1, num(Q.avgLen, 1));
+    var rows = [];
+    var kitRate = num(R.rack[Q.rackKit], 0);
+
+    if (num(Q.racksStd, 0) > 0) rows.push({ name: 'Standard racks', sub: KIT_NAME[Q.rackKit], qty: num(Q.racksStd, 0), unit: 'pcs', rate: kitRate });
+    if (num(Q.racksHd, 0) > 0) rows.push({ name: 'High-density racks', sub: KIT_NAME[Q.rackKit] + ', ' + mult(num(R.hdMult, 1)), qty: num(Q.racksHd, 0), unit: 'pcs', rate: kitRate * num(R.hdMult, 1) });
+
+    var cu = racks * num(Q.cuPerRack, 0), lc = racks * num(Q.lcPerRack, 0), mpo = racks * num(Q.mpoPerRack, 0);
+    var bandLabel = len > 100 ? 'over 100 m, ' + fmtInt.format(len) + ' m avg' : BAND_NAME[band(len)];
+    if (cu > 0) rows.push({ name: 'Copper Cat6A links', sub: bandLabel, qty: cu, unit: 'pcs', rate: linkRate('cu', len) });
+    if (lc > 0) rows.push({ name: 'Fiber LC links', sub: bandLabel, qty: lc, unit: 'pcs', rate: linkRate('lc', len) });
+    if (mpo > 0) rows.push({ name: 'MPO trunks', sub: bandLabel, qty: mpo, unit: 'pcs', rate: linkRate('mpo', len) });
+
+    var tiers = num(Q.tiers, 1);
+    var trayM = num(Q.trayM, 0);
+    if (trayM > 0) rows.push({ name: 'Cable pathways', sub: tiers + ' ' + (tiers === 1 ? 'tier' : 'tiers') + ' × ' + fmtInt.format(trayM) + ' m', qty: trayM * tiers, unit: 'm', rate: num(R.tray, 0) });
+
+    if (Q.cert) {
+      var certSum = cu * num(R.cert.cu, 0) + lc * num(R.cert.lc, 0) + mpo * num(R.cert.mpo, 0);
+      var certQty = cu + lc + mpo;
+      if (certQty > 0) rows.push({ name: 'Certification', sub: 'copper, fiber, trunks', qty: certQty, unit: 'links', rate: certSum / certQty, sumOverride: certSum });
+    }
+
+    rows.forEach(function (r) { r.sum = r.sumOverride != null ? r.sumOverride : r.qty * r.rate; });
+    var labor = rows.reduce(function (a, r) { return a + r.sum; }, 0);
+
+    var coefs = [];
+    if (Q.live) coefs.push({ k: 'live hall', v: num(R.coef.live, 1) });
+    if (Q.height) coefs.push({ k: 'above 3 m', v: num(R.coef.height, 1) });
+    if (Q.night) coefs.push({ k: 'nights, weekends', v: num(R.coef.night, 1) });
+    if (Q.raised) coefs.push({ k: 'raised floor', v: num(R.coef.raised, 1) });
+    var coef = coefs.reduce(function (a, c) { return a * c.v; }, 1);
+    var coefDelta = labor * (coef - 1);
+
+    var docs = Q.docs && racks > 0 ? Math.ceil(racks / 50) * num(R.docs, 0) : 0;
+    var mob = num(R.mob, 0);
+    var dist = num(Q.distMi, 0), loads = num(Q.loads, 0);
+    var loadCost = num(R.truckDay, 0) + 2 * dist * num(R.perMile, 0);
+    var transport = dist > 0 && loads > 0 ? loads * loadCost : 0;
+    var subtotal = labor + coefDelta + docs + mob + transport;
+    var cont = subtotal * num(R.contingency, 0) / 100;
+    var total = subtotal + cont;
+    var spread = num(R.spread[Q.level], 0) / 100;
+
+    return {
+      rows: rows, labor: labor, coefs: coefs, coef: coef, coefDelta: coefDelta,
+      docs: docs, docsQty: racks > 0 ? Math.ceil(racks / 50) : 0, mob: mob, cont: cont, subtotal: subtotal, total: total,
+      transport: transport, loads: loads, dist: dist, loadCost: loadCost, loadsEst: Math.ceil(racks / Math.max(1, num(R.racksPerLoad, 1))),
+      low: total * (1 - spread), high: total * (1 + spread), spread: spread,
+      racks: racks, links: cu + lc + mpo
+    };
+  }
+
+  /* ---------- render ---------- */
+  function el(id) { return document.getElementById(id); }
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+
+  function render() {
+    var c = calc();
+    var custom = JSON.stringify(R) !== JSON.stringify(DEFAULT_RATES);
+    var spreadTxt = '±' + fmtInt.format(c.spread * 100) + ' %';
+
+    el('levelName').textContent = LEVEL_NAME[Q.level];
+    el('levelSpread').textContent = spreadTxt;
+    el('stateTag').innerHTML = '<b>State:</b> ' + esc(LEVEL_NAME[Q.level]) + ' · ' + esc(spreadTxt) + ' · ' + (custom ? 'Contractor rates' : 'Example rates');
+    el('low').textContent = moneyShort(c.low);
+    el('high').textContent = moneyShort(c.high);
+    el('mid').textContent = money(c.total);
+    el('perRack').innerHTML = c.racks > 0 ? esc(moneyShort(c.total / c.racks)) : '—';
+    el('perLink').innerHTML = c.links > 0 ? esc(money(c.total / c.links)) + '<small>' + fmtInt.format(c.links) + ' links</small>' : '—';
+
+    var h = '';
+    c.rows.forEach(function (r) {
+      var share = c.total > 0 ? Math.max(0, Math.min(100, r.sum / c.total * 100)) : 0;
+      h += '<tr><td class="name">' + esc(r.name) + '<small>' + esc(r.sub) + '</small><i style="width:' + share.toFixed(1) + '%"></i></td>' +
+        '<td class="n">' + fmtInt.format(r.qty) + ' ' + r.unit + '</td>' +
+        '<td class="n">' + fmtInt.format(Math.round(r.rate)) + '</td>' +
+        '<td class="n">' + fmtInt.format(Math.round(r.sum)) + '</td></tr>';
+    });
+    if (c.coefs.length) {
+      h += '<tr class="muted"><td class="name">Site conditions<small>' + esc(c.coefs.map(function (x) { return x.k; }).join(', ')) + '</small></td>' +
+        '<td class="n"></td><td class="n">' + esc(mult(c.coef)) + '</td><td class="n">+' + fmtInt.format(Math.round(c.coefDelta)) + '</td></tr>';
+    }
+    if (c.docs > 0) h += '<tr><td class="name">Documentation<small>per project</small></td><td class="n">' + c.docsQty + ' ' + (c.docsQty === 1 ? 'project' : 'sets') + '</td><td class="n">' + fmtInt.format(num(R.docs, 0)) + '</td><td class="n">' + fmtInt.format(Math.round(c.docs)) + '</td></tr>';
+    if (c.mob > 0) h += '<tr><td class="name">Mobilization</td><td class="n">1</td><td class="n">' + fmtInt.format(c.mob) + '</td><td class="n">' + fmtInt.format(Math.round(c.mob)) + '</td></tr>';
+    if (c.transport > 0) h += '<tr><td class="name">Transport<small>' + fmtInt.format(c.loads) + ' ' + (c.loads === 1 ? 'load' : 'loads') + ' × ' + fmtInt.format(2 * c.dist) + ' mi round trip</small></td><td class="n">' + fmtInt.format(c.loads) + ' loads</td><td class="n">' + fmtInt.format(Math.round(c.loadCost)) + '</td><td class="n">' + fmtInt.format(Math.round(c.transport)) + '</td></tr>';
+    if (c.cont > 0) h += '<tr class="muted"><td class="name">Contingency</td><td class="n"></td><td class="n">' + fmtInt.format(num(R.contingency, 0)) + ' %</td><td class="n">+' + fmtInt.format(Math.round(c.cont)) + '</td></tr>';
+    h += '<tr class="sum"><td class="name">Bracket midpoint</td><td class="n"></td><td class="n"></td><td class="n">' + fmtInt.format(Math.round(c.total)) + '</td></tr>';
+    el('ledger').innerHTML = h;
+
+    var chips = [
+      { k: 'live hall', on: Q.live, v: R.coef.live },
+      { k: 'above 3 m', on: Q.height, v: R.coef.height },
+      { k: 'nights, weekends', on: Q.night, v: R.coef.night },
+      { k: 'raised floor', on: Q.raised, v: R.coef.raised }
+    ];
+    el('chips').innerHTML = chips.map(function (x) {
+      return '<span class="chip' + (x.on ? ' on' : '') + '">' + esc(x.k) + ' ' + esc(mult(num(x.v, 1))) + '</span>';
+    }).join('');
+
+    el('cLive').textContent = mult(num(R.coef.live, 1));
+    el('cHeight').textContent = mult(num(R.coef.height, 1));
+    el('cNight').textContent = mult(num(R.coef.night, 1));
+    el('cRaised').textContent = mult(num(R.coef.raised, 1));
+    el('coefNote').innerHTML = 'live hall <b>' + esc(mult(num(R.coef.live, 1))) + '</b> together with night windows <b>' + esc(mult(num(R.coef.night, 1))) + '</b> gives <b>' + esc(mult(num(R.coef.live, 1) * num(R.coef.night, 1))) + '</b>.';
+
+    var len = Math.max(1, num(Q.avgLen, 1));
+    el('bandHint').textContent = len > 100 ? 'band: up to 100 m + ' + fmtInt.format(len - 100) + ' m over' : 'band: ' + BAND_NAME[band(len)];
+    el('trayHint').textContent = 'estimate from racks: ' + fmtInt.format(c.racks * 3 + 40) + ' m';
+    el('loadsHint').textContent = 'estimate from racks: ' + fmtInt.format(c.loadsEst) + ' ' + (c.loadsEst === 1 ? 'load' : 'loads') + ' at ' + fmtInt.format(num(R.racksPerLoad, 1)) + ' per truck';
+
+    el('rateBadge').textContent = custom ? 'your rates' : 'example';
+    el('rateBadge').className = 'badge' + (custom ? ' custom' : '');
+    el('rateNote').textContent = custom
+      ? 'Contractor rates' + (R.company ? ': ' + R.company : '') + '. Labor only, no materials, no power up to the PDU.'
+      : 'Example rates. Replace them with yours in the price list below.';
+
+    var rows = el('levels').querySelectorAll('tr');
+    Array.prototype.forEach.call(rows, function (tr) {
+      var lv = tr.getAttribute('data-level');
+      tr.querySelector('span').textContent = fmtInt.format(num(R.spread[lv], 0));
+      tr.className = lv === Q.level ? 'cur' : '';
+    });
+
+    Array.prototype.forEach.call(document.querySelectorAll('[data-u]'), function (u) {
+      u.textContent = u.getAttribute('data-u').replace('{c}', R.cur);
+    });
+
+    el('footer').textContent = (R.company ? R.company + ' · ' : '') +
+      'rack, pathway and structured cabling labor · rates exclude materials · a rough estimate is not an offer';
+
+    save();
+  }
+
+  /* ---------- binding ---------- */
+  function fillInputs() {
+    Array.prototype.forEach.call(document.querySelectorAll('[data-q]'), function (inp) {
+      var k = inp.getAttribute('data-q'), v = Q[k];
+      if (inp.type === 'checkbox') inp.checked = !!v;
+      else if (inp.type === 'radio') inp.checked = inp.value === v;
+      else inp.value = v;
+    });
+    Array.prototype.forEach.call(document.querySelectorAll('[data-r]'), function (inp) {
+      var v = getPath(R, inp.getAttribute('data-r'));
+      inp.value = v == null ? '' : v;
+    });
+  }
+  function onQ(e) {
+    var inp = e.target, k = inp.getAttribute('data-q');
+    if (!k) return;
+    if (inp.type === 'checkbox') Q[k] = inp.checked;
+    else if (inp.type === 'radio') { if (inp.checked) Q[k] = inp.value; }
+    else if (inp.tagName === 'SELECT') Q[k] = k === 'tiers' ? num(inp.value, 1) : inp.value;
+    else Q[k] = num(inp.value, 0);
+    render();
+  }
+  function onR(e) {
+    var inp = e.target, p = inp.getAttribute('data-r');
+    if (!p) return;
+    if (inp.type === 'text') setPath(R, p, inp.value.trim() || (p === 'cur' ? '$' : ''));
+    else setPath(R, p, num(inp.value, 0));
+    render();
+  }
+  el('q').addEventListener('input', onQ);
+  el('q').addEventListener('change', onQ);
+  el('rates').addEventListener('input', onR);
+
+  el('estLoads').addEventListener('click', function () {
+    var racks = num(Q.racksStd, 0) + num(Q.racksHd, 0);
+    Q.loads = Math.ceil(racks / Math.max(1, num(R.racksPerLoad, 1)));
+    el('loads').value = Q.loads;
+    render();
+  });
+  el('estTray').addEventListener('click', function () {
+    var racks = num(Q.racksStd, 0) + num(Q.racksHd, 0);
+    Q.trayM = racks * 3 + 40;
+    el('trayM').value = Q.trayM;
+    render();
+  });
+
+  /* ---------- persistence: url hash, then localStorage ---------- */
+  function b64e(s) { return btoa(unescape(encodeURIComponent(s))).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, ''); }
+  function b64d(s) { s = s.replace(/-/g, '+').replace(/_/g, '/'); while (s.length % 4) s += '='; return decodeURIComponent(escape(atob(s))); }
+  function save() {
+    try { localStorage.setItem(STORE, JSON.stringify({ r: R, q: Q })); } catch (e) {}
+  }
+  function load() {
+    var fromHash = null;
+    try {
+      var m = /[#&]s=([A-Za-z0-9_-]+)/.exec(location.hash || '');
+      if (m) fromHash = JSON.parse(b64d(m[1]));
+    } catch (e) { fromHash = null; }
+    var fromStore = null;
+    if (!fromHash) { try { fromStore = JSON.parse(localStorage.getItem(STORE) || 'null'); } catch (e) { fromStore = null; } }
+    var src = fromHash || fromStore;
+    if (src) { merge(R, src.r); merge(Q, src.q); }
+  }
+  function shareUrl() {
+    var base = location.href.split('#')[0];
+    return base + '#s=' + b64e(JSON.stringify({ r: R, q: Q }));
+  }
+  var toastTimer;
+  function toast(msg) {
+    var t = el('toast'); t.textContent = msg; t.classList.add('show');
+    clearTimeout(toastTimer); toastTimer = setTimeout(function () { t.classList.remove('show'); }, 2200);
+  }
+  el('copyLink').addEventListener('click', function () {
+    var url = shareUrl();
+    el('linkOut').value = url;
+    try { history.replaceState(null, '', '#s=' + url.split('#s=')[1]); } catch (e) {}
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(url).then(function () { toast('Link copied'); }, function () { el('linkOut').select(); toast('Copy the link from the field'); });
+    } else { el('linkOut').select(); toast('Copy the link from the field'); }
+  });
+  el('resetRates').addEventListener('click', function () {
+    R = clone(DEFAULT_RATES);
+    fillInputs();
+    render();
+    toast('Example rates restored');
+  });
+
+  load();
+  fillInputs();
+  render();
+})();
+</script>
+</body>
+</html>
